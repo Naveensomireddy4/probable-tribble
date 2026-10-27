@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Naveen Kumar Reddy Somireddy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Source+Sans+3:wght@400;500;600&display=swap">
+<style>
+/* Layout: single-column academic homepage in the pattern of strong ML sites: bio and link row first, dated news, publications with a teaser figure per paper, then a compact CV. */
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --fg: #14181f;
+  --muted: #5b6573;
+  --line: #e0e5ec;
+  --accent: #1f4fd8;
+  --accent-soft: #e6edff;
+  --accent-ink: #ffffff;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1218; --surface: #161b24; --fg: #e7ebf2; --muted: #98a2b3; --line: #262d3a;
+    --accent: #7aa2ff; --accent-soft: #1a2540; --accent-ink: #0b1226; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1218; --surface: #161b24; --fg: #e7ebf2; --muted: #98a2b3; --line: #262d3a;
+  --accent: #7aa2ff; --accent-soft: #1a2540; --accent-ink: #0b1226; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font: 17px/1.65 var(--sans);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 56px;
+}
+a { color: var(--accent); text-underline-offset: 3px; overflow-wrap: anywhere; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 860px; margin: 0 auto; }
+h1, h2, h3, h4 { font-family: var(--serif); margin: 0; line-height: 1.2; text-wrap: balance; }
+
+/* top nav */
+.top { display: flex; flex-wrap: wrap; gap: 6px 22px; justify-content: space-between; align-items: baseline; padding: 20px 0 14px; border-bottom: 1px solid var(--line); font-size: 15px; }
+.top .brand { font-family: var(--serif); font-weight: 600; color: var(--fg); text-decoration: none; }
+.top nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.top nav a { color: var(--muted); text-decoration: none; }
+.top nav a:hover { color: var(--accent); }
+
+/* about */
+.about { padding: 44px 0 8px; }
+.about h1 { font-size: clamp(2rem, 5vw, 2.7rem); font-weight: 600; letter-spacing: -.015em; }
+.role { color: var(--muted); margin: 6px 0 22px; font-size: 1.05rem; }
+.about p { margin: 0 0 14px; max-width: 68ch; }
+.linkrow { display: flex; flex-wrap: wrap; gap: 8px 10px; margin-top: 20px; }
+.chip { display: inline-block; padding: 5px 13px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--fg); text-decoration: none; font-size: 15px; font-weight: 500; }
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.chip.primary:hover { color: var(--accent-ink); filter: brightness(1.1); }
+
+/* sections */
+section { padding: 34px 0 6px; }
+section > h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 18px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+
+/* news */
+.news { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.news li { display: grid; grid-template-columns: 78px minmax(0, 1fr); gap: 4px 14px; }
+.news time { color: var(--muted); font-size: 15px; font-variant-numeric: tabular-nums; padding-top: 1px; }
+
+/* publications */
+.pub { display: grid; grid-template-columns: 176px minmax(0, 1fr); gap: 20px; padding: 0 0 26px; margin-bottom: 26px; border-bottom: 1px solid var(--line); }
+.pub:last-child { border-bottom: 0; margin-bottom: 0; }
+.teaser { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; aspect-ratio: 168 / 108; width: 100%; align-self: start; }
+.teaser svg { display: block; width: 100%; height: 100%; }
+.pub h3 { font-size: 1.12rem; font-weight: 600; line-height: 1.3; }
+.authors { color: var(--muted); font-size: 15.5px; margin: 6px 0 8px; }
+.authors b { color: var(--fg); font-weight: 600; }
+.venue { font-size: 15.5px; margin-bottom: 8px; }
+.badge { display: inline-block; font-size: 12.5px; font-weight: 600; letter-spacing: .03em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-right: 8px; background: var(--accent-soft); color: var(--accent); }
+.badge.hot { background: var(--accent); color: var(--accent-ink); }
+.pub p { margin: 0 0 10px; color: var(--muted); font-size: 15.5px; }
+.pl { display: flex; flex-wrap: wrap; gap: 6px 8px; }
+.pl a { font-size: 13.5px; font-weight: 500; padding: 2px 10px; border: 1px solid var(--line); border-radius: 5px; text-decoration: none; background: var(--surface); }
+.pl a:hover { border-color: var(--accent); }
+
+/* experience and projects */
+.item { display: grid; grid-template-columns: 138px minmax(0, 1fr); gap: 4px 22px; padding-bottom: 26px; }
+.item:last-child { padding-bottom: 0; }
+.when { color: var(--muted); font-size: 15px; padding-top: 3px; }
+.item h3 { font-size: 1.08rem; font-weight: 600; }
+.org { color: var(--muted); font-size: 15.5px; margin: 2px 0 8px; }
+ul.pts { margin: 0; padding-left: 1.15em; font-size: 15.5px; }
+ul.pts li { margin-bottom: 5px; }
+ul.pts b { font-weight: 600; }
+.sub { margin-top: 16px; padding-top: 14px; border-top: 1px dashed var(--line); }
+.sub h4 { font-size: 1rem; font-weight: 600; }
+.sub .tag { color: var(--accent); font-size: 14px; margin: 3px 0 8px; font-weight: 500; }
+.label { font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 12px 0 4px; }
+.one { grid-template-columns: minmax(0, 1fr); }
+
+dl.skills { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 8px 22px; margin: 0; font-size: 15.5px; }
+dl.skills dt { color: var(--muted); }
+dl.skills dd { margin: 0; }
+.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 40px; margin-top: 26px; }
+.two h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.two p, .two ul { font-size: 15.5px; margin: 0; }
+.two ul { padding-left: 1.15em; }
+
+.contact-row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-bottom: 10px; }
+.copy { font: 500 13.5px var(--sans); padding: 3px 11px; border-radius: 5px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); cursor: pointer; }
+.copy:hover { border-color: var(--accent); color: var(--accent); }
+footer { margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+
+@media (max-width: 720px) {
+  body { font-size: 16.5px; }
+  .pub { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .teaser { max-width: 260px; }
+  .item, dl.skills { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  dl.skills dd { margin-bottom: 10px; }
+  .two { grid-template-columns: minmax(0, 1fr); }
+  .news li { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .chip, .copy, .pl a { transition: border-color .15s, color .15s, filter .15s; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="#about">Naveen Kumar Reddy Somireddy</a>
+    <nav aria-label="Sections">
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="about" id="about">
+    <h1>Naveen Kumar Reddy Somireddy</h1>
+    <div class="role">Researcher in federated and continual learning &middot; applying for PhD programs</div>
+    <p>I work on how learning systems adapt, retain and forget. Most of my research asks how a model can learn a sequence of tasks across many clients with different data without losing what it learned earlier, and how it can later be made to forget on request.</p>
+    <p>My approach is to treat forgetting as something to track and control. In FedQCL I did this with drift-plus-penalty optimization, and in DUET-CLU with a constrained primal-dual formulation. FedQCL was accepted as an <b>oral at CoLLAs 2026</b>, and DUET-CLU is under review at AISTATS 2027. I was a research assistant at IIIT Delhi with Prof. Ranjitha Prasad and a research intern at NIT Karnataka, Surathkal. More recently I worked as a data engineer at Tredence.</p>
+    <div class="linkrow">
+      <a class="chip primary" href="resume.pdf">CV</a>
+      <a class="chip" href="#contact">Email</a>
+      <a class="chip" href="https://github.com/Naveensomireddy4">GitHub</a>
+      <a class="chip" href="https://www.linkedin.com/in/naveen-kumar-reddy-somi-reddy-1b1ab2246/">LinkedIn</a>
+      <a class="chip" href="https://arxiv.org/abs/2608.21539">FedQCL on arXiv</a>
+    </div>
+  </div>
+
+  <section id="news">
+    <h2>News</h2>
+    <ul class="news">
+      <li><time>2026</time><span>FedQCL is also accepted at the <b>WiML Workshop</b> at NeurIPS 2026.</span></li>
+      <li><time>Oct 2026</time><span>Submitted DUET-CLU, a unified continual learning and unlearning framework, to AISTATS 2027.</span></li>
+      <li><time>Sep 2026</time><span>Presented FedQCL as an <b>oral</b> at <b>CoLLAs 2026</b>.</span></li>
+      <li><time>Jul 2026</time><span>FedQCL accepted at <b>CoLLAs 2026</b> as an <b>oral presentation</b>, among the top 8% of accepted papers.</span></li>
+      <li><time>Apr 2026</time><span>Submitted FedQCL to CoLLAs 2026.</span></li>
+      <li><time>Feb 2026</time><span>Started as a Data Analyst and Data Engineer (MLOps) at Tredence, Bengaluru.</span></li>
+      <li><time>Aug 2025</time><span>Completed the federated continual learning work on Whisper-small: a federated pipeline with A-GEM, reaching 96% accuracy in the IID setting, nearly matching centralized training, and 80% non-IID.</span></li>
+      <li><time>Dec 2024</time><span>Joined IIIT Delhi as a research assistant in federated continual learning.</span></li>
+    </ul>
+  </section>
+
+  <section id="publications">
+    <h2>Publications</h2>
+
+    <article class="pub">
+      <figure class="teaser">
+        <svg id="t1" viewBox="0 0 168 108" role="img" aria-label="Lower-triangular grid of virtual queue values, darkest on early tasks"></svg>
+      </figure>
+      <div>
+        <h3>Federated Continual Learning as a Distributed Drift-Plus-Penalty Control Problem</h3>
+        <div class="authors">Nazreen Shah, <b>Naveen Kumar Reddy Somireddy</b>, Zubair Shaban, Ranjitha Prasad, Bharath B. N.</div>
+        <div class="venue"><span class="badge hot">Oral</span><em>CoLLAs 2026</em> (top 8% of accepted papers) &middot; also accepted at the NeurIPS 2026 WiML Workshop</div>
+        <p>FedQCL adds client-local virtual queues that track forgetting across tasks and clients. On Split-CIFAR-10, Split-CIFAR-100 and Split-TinyImageNet it beats the strongest replay baseline in accuracy, with no gradient projection and no added communication over FedAvg.</p>
+        <div class="pl">
+          <a href="https://arxiv.org/abs/2608.21539">arXiv</a>
+          <a href="https://github.com/Naveensomireddy4/FedQCL_Task">Code (Task-IL)</a>
+          <a href="https://github.com/Naveensomireddy4/FedQCL_CIL">Code (Class-IL)</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="pub">
+      <figure class="teaser">
+        <svg viewBox="0 0 168 108" role="img" aria-label="Illustrative bars for the dual multiplier on each past requirement, each with a lighter slack segment">
+          <g font-size="8" fill="var(--muted)" font-family="Source Sans 3, sans-serif">
+            <text x="12" y="23">req 1</text><text x="12" y="39">req 2</text><text x="12" y="55">req 3</text><text x="12" y="71">req 4</text><text x="12" y="87">req 5</text>
+          </g>
+          <g>
+            <rect x="44" y="15" width="78" height="10" rx="2" fill="var(--accent)"/><rect x="122" y="15" width="12" height="10" rx="2" fill="var(--accent)" fill-opacity=".3"/>
+            <rect x="44" y="31" width="52" height="10" rx="2" fill="var(--accent)"/><rect x="96" y="31" width="30" height="10" rx="2" fill="var(--accent)" fill-opacity=".3"/>
+            <rect x="44" y="47" width="64" height="10" rx="2" fill="var(--accent)"/><rect x="108" y="47" width="8" height="10" rx="2" fill="var(--accent)" fill-opacity=".3"/>
+            <rect x="44" y="63" width="30" height="10" rx="2" fill="var(--accent)"/><rect x="74" y="63" width="36" height="10" rx="2" fill="var(--accent)" fill-opacity=".3"/>
+            <rect x="44" y="79" width="42" height="10" rx="2" fill="var(--accent)"/><rect x="86" y="79" width="18" height="10" rx="2" fill="var(--accent)" fill-opacity=".3"/>
+          </g>
+          <text x="44" y="102" font-size="7.5" fill="var(--muted)" font-family="Source Sans 3, sans-serif">dual pressure + slack (illustrative)</text>
+        </svg>
+      </figure>
+      <div>
+        <h3>Unified Continual Learning and Unlearning with Adaptive Constraints</h3>
+        <div class="authors">Nazreen Shah, Prashant Khanduri, <b>Naveen Kumar Reddy Somireddy</b>, Bharath B. N., Ranjitha Prasad</div>
+        <div class="venue"><span class="badge">Under review</span><em>AISTATS 2027</em></div>
+        <p>DUET-CLU is a primal-dual framework. Retention and non-resurgence become explicit task-level constraints in one problem, with adaptive slack variables and dual multipliers that measure how much pressure each past requirement exerts.</p>
+        <div class="pl"><a href="https://github.com/Naveensomireddy4/Baselines">Baseline library</a></div>
+      </div>
+    </article>
+
+    <article class="pub">
+      <figure class="teaser">
+        <svg viewBox="0 0 168 108" role="img" aria-label="Clients drawn as dots, fast clients solid and slow clients light, with a dropped client dashed and an arrow to its nearest active client">
+          <g fill="var(--accent)">
+            <circle cx="34" cy="30" r="7"/><circle cx="60" cy="52" r="7"/><circle cx="96" cy="28" r="7"/>
+          </g>
+          <g fill="var(--accent)" fill-opacity=".35">
+            <circle cx="30" cy="78" r="7"/><circle cx="114" cy="54" r="7"/><circle cx="72" cy="84" r="7"/>
+          </g>
+          <circle cx="138" cy="86" r="7" fill="none" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="3 2.5"/>
+          <path d="M134 79 L119 61" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="3 2.5" fill="none"/>
+          <path d="M117 66 L117.5 59 L123.5 62.5 Z" fill="var(--muted)"/>
+          <g font-size="7.5" fill="var(--muted)" font-family="Source Sans 3, sans-serif">
+            <text x="10" y="102">fast</text><text x="36" y="102">slow</text><text x="118" y="102">dropped</text>
+          </g>
+        </svg>
+      </figure>
+      <div>
+        <h3>FedResilience: Concurrent Handling of Client Dropout and Slow Learners in Federated Learning</h3>
+        <div class="authors"><b>Naveen Kumar Reddy Somireddy</b> (first author), Sachin Dudda Nagaraju, Annappa B.</div>
+        <div class="venue"><span class="badge">Manuscript</span>Proximity-based weight transfer and adaptive batch scheduling</div>
+        <p>Dropped clients resume from the nearest active client chosen by cosine similarity, while slow and fast clients train in separate batches. On BloodMNIST it reaches 82.1% accuracy in 8 rounds, where FedAvg needs 15 rounds for 80.95%.</p>
+      </div>
+    </article>
+  </section>
+
+  <section id="experience">
+    <h2>Experience</h2>
+
+    <div class="item">
+      <div class="when">Feb &ndash; Oct 2026</div>
+      <div>
+        <h3>Data Analyst &amp; Data Engineer (MLOps)</h3>
+        <div class="org">Tredence, Bengaluru, India</div>
+        <ul class="pts">
+          <li>Migrated <b>five data pipelines (20 tables, about 3 billion records each)</b> from Hive to <b>Google Cloud Platform</b>.</li>
+          <li>Converted the SQL jobs to <b>Spark (Scala)</b>, managed in GitHub and deployed through Vela. Shepherd automation invokes Dataproc to run them and populate the GCP tables.</li>
+          <li>Runs finish in under 3 minutes in SQL and about 10 minutes through Spark (Scala) with Shepherd automation. Reporting moved to Power BI.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="when">Dec 2024 &ndash; Mar 2026</div>
+      <div>
+        <h3>Research Assistant, Federated Continual Learning &amp; Unlearning</h3>
+        <div class="org">Indraprastha Institute of Information Technology Delhi &middot; Advisor: Prof. Ranjitha Prasad</div>
+
+        <div class="sub">
+          <h4>FedQCL: Federated Continual Learning via Drift-Plus-Penalty</h4>
+          <div class="tag">Co-author &middot; CoLLAs 2026 oral</div>
+          <ul class="pts">
+            <li>Formulated federated continual learning as a stochastic control problem. Client-local virtual queues track accumulated forgetting, and one parameter balances stability and plasticity, with no gradient projection or extra communication.</li>
+            <li>Task-IL with ResNet-18 and five non-IID clients: <b>54.5%</b> vs. 51.0% for DER++-FL on Split-CIFAR-100, <b>85.7%</b> vs. 83.9% on Split-CIFAR-10, <b>33.4%</b> vs. 31.0% on Split-TinyImageNet.</li>
+            <li>Class-IL on Split-CIFAR-100: 24.92% vs. 24.32% (near-IID) and 14.66% vs. 14.02% (non-IID) against DER++.</li>
+          </ul>
+          <div class="label">My contributions</div>
+          <ul class="pts">
+            <li>Implemented the FedQCL method and its experimental codebase, implemented or integrated all baselines (FedAvg, FedProto, EWC-FL, LwF-FL, ER-FL, DER-FL, DER++-FL, CCVR, FOT, BI), and contributed to the theoretical development.</li>
+            <li>Designed the experiments and ablations, tuned hyperparameters, and ran the evaluation suite across data heterogeneity, buffer size, client count and task count, in Task-IL and Class-IL.</li>
+          </ul>
+        </div>
+
+        <div class="sub">
+          <h4>DUET-CLU: Unified Continual Learning and Unlearning</h4>
+          <div class="tag">Co-author &middot; Jul&ndash;Oct 2026 &middot; AISTATS 2027 (under review)</div>
+          <ul class="pts">
+            <li>Formulates retention and non-resurgence as task-level constraints in a primal-dual framework with adaptive slack variables and dual multipliers. Includes a dual-sensitivity characterization and a slack&ndash;dual equilibrium under convex per-request assumptions.</li>
+          </ul>
+          <div class="label">My contributions</div>
+          <ul class="pts">
+            <li>Implemented the DUET-CLU framework and its experimental codebase, implemented or integrated the comparison baselines (Retrain, EWC, LwF, ER, DER++, LSF, CLPU, CLMUL, UnCLe, PALL), and contributed to the theoretical formulation and analysis.</li>
+            <li>Designed experiments and ablations, tuned hyperparameters, and evaluated the effect of slack variables and dual multipliers in Task-IL and Class-IL.</li>
+          </ul>
+        </div>
+
+        <div class="sub">
+          <h4>Continual Learning for Federated Speech Models (Whisper-small)</h4>
+          <ul class="pts">
+            <li>Built a federated training pipeline for Whisper-small and integrated A-GEM as the continual-learning method. Reached 96% accuracy in the IID setting, nearly matching centralized training on all the data, and 80% in the non-IID setting.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="when">May &ndash; Nov 2024</div>
+      <div>
+        <h3>Research Intern, Federated Learning</h3>
+        <div class="org">National Institute of Technology Karnataka, Surathkal &middot; Advisor: Prof. Annappa B.</div>
+        <ul class="pts">
+          <li>First author on <b>FedResilience</b>, a FedAvg-based framework that handles client dropout through proximity-based weight transfer from the most similar active client, and slow learners through adaptive dual-batch scheduling.</li>
+          <li>On BloodMNIST with ResNet-18 under non-IID data, reached <b>82.1% accuracy in 8 rounds</b>, versus 80.95% for FedAvg in 15 rounds.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="item one">
+      <div>
+        <h3>Real-Time Scene Graph Generation</h3>
+        <div class="org">YOLOv5, PAN-FPN, GloVe, PyTorch &middot; Jan&ndash;Mar 2024 &middot; Advisor: Dr. Arindam Biswas</div>
+        <ul class="pts"><li>Real-time model for object detection and relation classification using PAN-FPN feature fusion, spatial encodings and ROI Align. Reaches <b>14.5 mR@100 at 30 FPS</b> on the Panoptic Scene Graph dataset. <a href="https://github.com/Naveensomireddy4/Understanding-image-scenes-using-Neural-Networks">Code</a></li></ul>
+      </div>
+    </div>
+    <div class="item one">
+      <div>
+        <h3>Client Relationship Management System</h3>
+        <div class="org">Django REST, React, PostgreSQL &middot; Apr&ndash;Jul 2024</div>
+        <ul class="pts"><li>Role-based CRM with token-authenticated APIs and real-time lead tracking. <b>Cut lead assignment time by over 40%.</b> <a href="https://github.com/Naveensomireddy4/CRM">Code</a></li></ul>
+      </div>
+    </div>
+    <div class="item one">
+      <div>
+        <h3>Baseline library for continual learning and unlearning</h3>
+        <div class="org">Python, PyTorch</div>
+        <ul class="pts"><li>FedAvg, FedProto, EWC, LwF, ER, DER/DER++, A-GEM, CCVR, FOT, BI, LSF, CLPU, CLMUL, UnCLe and PALL in one place. <a href="https://github.com/Naveensomireddy4/Baselines">Code</a></li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2>Education</h2>
+    <div class="item">
+      <div class="when">2021 &ndash; 2025</div>
+      <div>
+        <h3>B.Tech. in Information Technology</h3>
+        <div class="org">Indian Institute of Engineering Science and Technology (IIEST), Shibpur &middot; CGPA 8.68 / 10</div>
+        <ul class="pts"><li>Coursework: Machine Learning, Artificial Intelligence, Data Structures and Algorithms, Linear Algebra, Operating Systems, DBMS, Computer Networks, Computer Architecture</li></ul>
+      </div>
+    </div>
+
+    <h3 style="font-size:1.05rem;margin:26px 0 12px">Skills</h3>
+    <dl class="skills">
+      <dt>Research</dt><dd>Federated learning, continual learning, machine unlearning, constrained optimization, primal-dual methods, experiment design and automation</dd>
+      <dt>Programming and ML</dt><dd>Python, C++, SQL, PyTorch, TensorFlow, Hugging Face</dd>
+      <dt>Data and infrastructure</dt><dd>Hive, Spark, Scala, GCP, Power BI, MLOps, Docker, Git, Linux</dd>
+      <dt>Models and benchmarks</dt><dd>ResNet-18, Whisper; Split-CIFAR-10/100, Split-TinyImageNet, BloodMNIST</dd>
+    </dl>
+
+    <div class="two">
+      <div>
+        <h3>Honors</h3>
+        <ul>
+          <li><b>CoLLAs 2026:</b> oral presentation, top 8% of accepted papers.</li>
+          <li><b>LeetCode:</b> Knight (top 3%), 1,100+ problems solved, rank 97 in Biweekly Contest 133.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>References</h3>
+        <p>Prof. Ranjitha Prasad (IIIT Delhi) and Prof. Annappa B. (NITK Surathkal). Contact details available on request.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-row">
+      <span id="mail">naveensomireddy2112@gmail.com</span>
+      <button class="copy" type="button" data-copy="mail">Copy</button>
+    </div>
+    <div class="contact-row">
+      <span id="phone">+91 8977774829</span>
+      <button class="copy" type="button" data-copy="phone">Copy</button>
+    </div>
+    <div class="linkrow">
+      <a class="chip" href="https://github.com/Naveensomireddy4">GitHub</a>
+      <a class="chip" href="https://www.linkedin.com/in/naveen-kumar-reddy-somi-reddy-1b1ab2246/">LinkedIn</a>
+      <a class="chip" href="resume.pdf">CV (PDF)</a>
+    </div>
+  </section>
+
+  <footer>Last updated October 2026. Open to PhD opportunities in federated and continual learning.</footer>
+</div>
+
+<script>
+(function () {
+  // FedQCL teaser: lower-triangular queue matrix, early tasks hold the most pressure and it fades along the diagonal.
+  var svg = document.getElementById('t1');
+  var n = 5, size = 14, gap = 3, out = '';
+  var total = n * size + (n - 1) * gap, x0 = (168 - total) / 2, y0 = (108 - total) / 2;
+  for (var i = 0; i < n; i++) {
+    for (var j = 0; j <= i; j++) {
+      var s = (1 - j / n) * (0.35 + 0.65 * (i / (n - 1))) * (j === i ? 0.45 : 1);
+      var op = Math.max(0.12, Math.min(1, s)).toFixed(2);
+      out += '<rect x="' + (x0 + j * (size + gap)) + '" y="' + (y0 + i * (size + gap)) + '" width="' + size + '" height="' + size + '" rx="2.5" fill="var(--accent)" fill-opacity="' + op + '"/>';
+    }
+  }
+  svg.innerHTML = out;
+
+  Array.prototype.forEach.call(document.querySelectorAll('.copy'), function (btn) {
+    btn.addEventListener('click', function () {
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      var text = el.textContent;
+      var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1600); };
+      var fallback = function () {
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Press Ctrl/Cmd+C';
+      };
+      try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+    });
+  });
+})();
+</script>
+</body>
+</html>
